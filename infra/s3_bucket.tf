@@ -40,3 +40,10 @@ resource "aws_s3_bucket_policy" "fe_bucket_policy" {
     ]
   })
 }
+
+
+resource "aws_s3_object" "index_file" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+  key = "index.html"
+  source = "../index.html"
+}
