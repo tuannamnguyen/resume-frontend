@@ -50,18 +50,16 @@ resource "aws_s3_object" "index_file" {
 
 locals {
   assets_directory = "${path.root}/../assets/"
-  css_directory = "${path.root}/../css/"
+  css_directory    = "${path.root}/../css/"
 
   mime_types = {
-    default = {
-      htm  = "text/html"
-      html = "text/html"
-      css  = "text/css"
-      ttf  = "font/ttf"
-      js   = "application/javascript"
-      map  = "application/javascript"
-      json = "application/json"
-    }
+    htm  = "text/html"
+    html = "text/html"
+    css  = "text/css"
+    ttf  = "font/ttf"
+    js   = "application/javascript"
+    map  = "application/javascript"
+    json = "application/json"
   }
 
 }
@@ -70,8 +68,8 @@ resource "aws_s3_object" "assets_folder" {
 
   bucket = aws_s3_bucket.frontend_bucket.id
 
-  key    = replace(each.value, local.assets_directory, "")
-  source = "${local.assets_directory}${each.value}"
+  key          = replace(each.value, local.assets_directory, "")
+  source       = "${local.assets_directory}${each.value}"
   content_type = lookup(local.mime_types, split(".", each.value)[length(split(".", each.value)) - 1])
 }
 
@@ -80,7 +78,7 @@ resource "aws_s3_object" "css_folder" {
 
   bucket = aws_s3_bucket.frontend_bucket.id
 
-  key    = replace(each.value, local.css_directory, "")
-  source = "${local.css_directory}${each.value}"
+  key          = replace(each.value, local.css_directory, "")
+  source       = "${local.css_directory}${each.value}"
   content_type = lookup(local.mime_types, split(".", each.value)[length(split(".", each.value)) - 1])
 }
