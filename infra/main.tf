@@ -12,6 +12,6 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket        = "resume-frontend-bucket"
+  bucket        = "tuannamnguyen-resume-frontend-bucket"
   force_destroy = true
 }
