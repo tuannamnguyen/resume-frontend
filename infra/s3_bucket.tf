@@ -41,13 +41,6 @@ resource "aws_s3_bucket_policy" "fe_bucket_policy" {
   })
 }
 
-
-resource "aws_s3_object" "index_file" {
-  bucket = aws_s3_bucket.frontend_bucket.id
-  key    = "index.html"
-  source = "../index.html"
-}
-
 locals {
   assets_directory = "${path.root}/../assets/"
   css_directory    = "${path.root}/../css/"
@@ -65,6 +58,15 @@ locals {
   }
 
 }
+
+resource "aws_s3_object" "index_file" {
+  bucket       = aws_s3_bucket.frontend_bucket.id
+  key          = "index.html"
+  source       = "../index.html"
+  content_type = "text/html"
+}
+
+
 resource "aws_s3_object" "assets_folder" {
   for_each = fileset(local.assets_directory, "**/*.*")
 
