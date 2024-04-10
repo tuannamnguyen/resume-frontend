@@ -60,6 +60,8 @@ locals {
     js   = "application/javascript"
     map  = "application/javascript"
     json = "application/json"
+    jpg  = "image/jpeg"
+    ico  = "image/ico"
   }
 
 }
