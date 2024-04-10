@@ -61,7 +61,7 @@ locals {
     map  = "application/javascript"
     json = "application/json"
     jpg  = "image/jpeg"
-    ico  = "image/ico"
+    ico  = "image/x-icon"
   }
 
 }
@@ -70,7 +70,7 @@ resource "aws_s3_object" "assets_folder" {
 
   bucket = aws_s3_bucket.frontend_bucket.id
 
-  key          = replace(each.value, local.assets_directory, "")
+  key          = "assets/${replace(each.value, local.assets_directory, "")}"
   source       = "${local.assets_directory}${each.value}"
   content_type = lookup(local.mime_types, split(".", each.value)[length(split(".", each.value)) - 1])
 }
@@ -80,7 +80,7 @@ resource "aws_s3_object" "css_folder" {
 
   bucket = aws_s3_bucket.frontend_bucket.id
 
-  key          = replace(each.value, local.css_directory, "")
+  key          = "css/${replace(each.value, local.css_directory, "")}"
   source       = "${local.css_directory}${each.value}"
   content_type = lookup(local.mime_types, split(".", each.value)[length(split(".", each.value)) - 1])
 }
