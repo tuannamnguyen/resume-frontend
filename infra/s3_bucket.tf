@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket        = "tuannamnguyen-resume-frontend-bucket"
+  bucket        = local.domain_name
   force_destroy = true
 }
 
@@ -39,6 +39,8 @@ resource "aws_s3_bucket_policy" "fe_bucket_policy" {
       }
     ]
   })
+
+  depends_on = [aws_s3_bucket_public_access_block.fe_bucket_access_block]
 }
 
 locals {
