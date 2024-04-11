@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket        = "tuannamnguyen-resume-frontend-bucket"
+  bucket        = local.domain_name
   force_destroy = true
 }
 
