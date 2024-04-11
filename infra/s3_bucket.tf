@@ -40,7 +40,7 @@ resource "aws_s3_bucket_policy" "fe_bucket_policy" {
     ]
   })
 
-  depends_on = [ aws_s3_bucket_public_access_block.fe_bucket_access_block ]
+  depends_on = [aws_s3_bucket_public_access_block.fe_bucket_access_block]
 }
 
 locals {
