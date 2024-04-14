@@ -1,3 +1,7 @@
+locals {
+  s3_origin_id = "my_fe_s3_origin"
+}
+
 resource "aws_s3_bucket" "frontend_bucket" {
   bucket        = local.domain_name
   force_destroy = true
