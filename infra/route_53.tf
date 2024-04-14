@@ -20,7 +20,7 @@ resource "aws_route53_record" "fe-route53-record" {
 }
 
 resource "aws_route53_record" "records-for-acm" {
-for_each = {
+  for_each = {
     for dvo in aws_acm_certificate.fe-bucket-certificate.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
@@ -29,9 +29,9 @@ for_each = {
   }
 
   zone_id = aws_route53_zone.fe-hosted-zone.zone_id
-  name = each.value.name
+  name    = each.value.name
   records = [each.value.record]
-  ttl = 60
-  type = each.value.type
+  ttl     = 60
+  type    = each.value.type
 }
 
