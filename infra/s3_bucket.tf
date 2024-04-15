@@ -7,6 +7,13 @@ resource "aws_s3_bucket" "frontend_bucket" {
   force_destroy = true
 }
 
+resource "aws_s3_bucket_versioning" "fe-bucket-versioning" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "fe_bucket_access_block" {
   bucket = aws_s3_bucket.frontend_bucket.id
 
